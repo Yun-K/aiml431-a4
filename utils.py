@@ -81,10 +81,8 @@ def get_EMNIST(params):
     return dataloader
 
 
-
 if __name__ == '__main__':
     # from train import params
     print(root)
-    
+    # from train import load_model_and_generate_images
     # root_loader = get_EMNIST({'imsize' : 32, 'bsize' : 32})
-    
