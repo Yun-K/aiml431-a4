@@ -65,12 +65,19 @@ class Generator(nn.Module):
         #TODO:!! Define how the data flows in Generator
         # print("-"*30)
         # print(f"Generator input shape: {x.shape}")
+        
         output = self.main(x)
-        # print some information
+        
         # print(f"Generator output shape: {output.shape}")
         # print("-"*30)
         
         return output
+        # ------------------------------
+        # Generator input shape: torch.Size([32, 100, 1, 1])
+        # Generator output shape: torch.Size([32, 1, 32, 32])
+        # ------------------------------
+
+        
 class Discriminator(nn.Module):
     """input image size is 32x32, 
     the convolutional layers are defined as follows:
@@ -119,9 +126,6 @@ class Discriminator(nn.Module):
         # we use the sigmoid function to get the probability of the image being real or fake
         # the output is a scalar between 0 and 1 where 0 is fake and 1 is real
         
-        
-
-
     def forward(self, x):
         # print("-"*40)
         # print(f"Discriminator input shape: {x.shape}")
@@ -131,6 +135,13 @@ class Discriminator(nn.Module):
         x = self.conv2(x)
         x = self.conv3(x)
         x = self.conv4(x)
+
         # print(f"Discriminator output shape: {x.shape}")
         # print("-"*40)
         return x
+
+        # ----------------------------------------
+        # Discriminator input shape: torch.Size([32, 1, 32, 32])
+        # Discriminator output shape: torch.Size([32, 1, 1, 1])
+        # ----------------------------------------
+

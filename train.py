@@ -72,7 +72,7 @@ def plot_loss(d_losses, g_losses, num_epoch, save=False, save_dir='DCGAN_results
 #The help function for plotting results
 def plot_result(generator, noise, num_epoch, save=False, save_dir='DCGAN_results/', show=True, fig_size=(5, 5), isTrainedModel=False):
     #TODO:!!! Call the model G (generator) properly to generate images from noises (Part 3.3)
-    with torch.no_grad():
+    with torch.no_grad():# disable gradient calculation to avoid problems with the autograd engine
         gen_image = generator(noise).detach().cpu()
     img_list.append(vutils.make_grid(gen_image, padding=2, normalize=True))
     
@@ -84,7 +84,7 @@ def plot_result(generator, noise, num_epoch, save=False, save_dir='DCGAN_results
     n_rows = np.sqrt(noise.size()[0]).astype(np.int32)
     n_cols = np.sqrt(noise.size()[0]).astype(np.int32)
     
-    print(f"n_rows: {n_rows}, n_cols: {n_cols}, noise.size(): {noise.size()} \n generated images number = {gen_image.size()[0]}\n")
+    # print(f"n_rows: {n_rows}, n_cols: {n_cols}, noise.size(): {noise.size()} \n generated images number = {gen_image.size()[0]}\n")
     
     
     fig, axes = plt.subplots(n_rows, n_cols, figsize=fig_size)
@@ -240,6 +240,10 @@ for epoch in range(num_epochs):
         #TODO:!!! Finish the code in "plot_result()" and call it properly to generate and save images
         plot_result(netG, fixed_noise, epoch, save=True, show=False,fig_size=(5, 5))
 
+# finish training, chaneg the mode back to eval mode to avoid the influence of dropout and batch normalization states
+netG.eval()
+
+
 # TODO:!!! Save the final trained model.
 torch.save(netG.state_dict(), 'DCGAN_results/saved_models/netG_final.pth')
 
@@ -311,3 +315,13 @@ plot_side_by_side()
 
 #TODO:!!! Part 4 (Challenge) Make necessary changes to adapt to Conditional DCGAN model.
 #Any reasonable attempts you made could get some points, even the new model doesn't work properly.
+
+class ConditionalGenerator(Generator):
+    """Generator for Conditional DCGAN model."""
+    def __init__(self, params):
+        super(ConditionalGenerator, self).__init__(params)
+    
+class ConditionalDiscriminator(Discriminator):
+    """Discriminator for Conditional DCGAN model."""
+    def __init__(self, params):
+        super(ConditionalDiscriminator, self).__init__(params)

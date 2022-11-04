@@ -39,11 +39,12 @@ def get_EMNIST(params):
                
         # transforms.RandomHorizontalFlip(),
         # transforms.RandomVerticalFlip(), # randomly flip the image vertically
-        # # randomly rotate the image by 20 degrees, translate the image by 0.1 in x and y directions, and scale the image by 0.8 to 1.2 times
-        # transforms.RandomAffine(20, translate=(0.1,0.1), scale=(0.8,1.2)), 
-        
         transforms.RandomRotation((90,90)) ,
         transforms.RandomVerticalFlip(1),       
+
+        # # based on the image center, randomly rotate the image by 20 degrees, translate the image by 0-0.1 in x and y directions, and scale the image by 0.8 to 1.2 times
+        # transforms.RandomAffine(20, translate=(0,0.1), scale=(0.8,1.2)), 
+        
         
         
         # transforms.ColorJitter(brightness=0.2, contrast=0.2), # randomly change the brightness, contrast 
