@@ -9,3 +9,6 @@ nohup python -u train.py > log.out 2>&1 &
 ```
 
 Also, as you can see from the above command, the log.out contains all the outputs of my program, so if you want, you can have a look at the log.out file
+
+
+In addition, I have also run my program that is trained ONLY on the A and B subfolder, respectively. Hence, the corresponding images can be found under DCGAN_results/A_results and DCGAN_results/B_results.

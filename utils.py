@@ -75,7 +75,8 @@ def get_EMNIST(params):
         plt.figure(figsize=(8,8))
         plt.axis("off")
         plt.title("Training Images")
-        plt.imshow(np.transpose(vutils.make_grid(real_batch[0].to("cpu")[:32], padding=2, normalize=True).cpu(),(1,2,0)))
+        # show 128 images in a 8x8 grid
+        plt.imshow(np.transpose(vutils.make_grid(real_batch[0].to("cpu")[:128], padding=6, normalize=True).cpu(),(1,2,0)))
         plt.show()
     # plot_images()
     
